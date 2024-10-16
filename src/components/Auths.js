@@ -1,28 +1,23 @@
 // src/components/Auth.js
 import { useState } from 'react';
 import { auth } from '../firebaseConfig';
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth';
-import './Auth.css'; // For styling
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import './Auth.css';
 
 const Auth = () => {
+  const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false);
 
   const handleAuth = async () => {
     try {
       if (isRegistering) {
         await createUserWithEmailAndPassword(auth, email, password);
-        alert('Registered successfully!');
+        alert('Registration successful!');
       } else {
         await signInWithEmailAndPassword(auth, email, password);
-        alert('Logged in successfully!');
+        alert('Login successful!');
       }
-      setEmail('');
-      setPassword('');
     } catch (error) {
       alert(error.message);
     }
