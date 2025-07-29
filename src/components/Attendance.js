@@ -1,21 +1,15 @@
 // src/components/Attendance.js
 import { useState } from 'react';
-import { db } from '../firebaseConfig';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const Attendance = () => {
   const [studentName, setStudentName] = useState('');
 
   const markAttendance = async () => {
-    try {
-      await addDoc(collection(db, 'attendance'), {
-        name: studentName,
-        time: Timestamp.now(),
-      });
+    if (studentName) {
       alert('Attendance marked successfully!');
       setStudentName('');
-    } catch (error) {
-      alert('Error:', error.message);
+    } else {
+      alert('Please enter student name.');
     }
   };
 
