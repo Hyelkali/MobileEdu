@@ -1,7 +1,5 @@
 // src/components/Auth.js
 import { useState } from 'react';
-import { auth } from '../firebaseConfig';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import './Auth.css';
 
 const Auth = () => {
@@ -10,16 +8,11 @@ const Auth = () => {
   const [password, setPassword] = useState('');
 
   const handleAuth = async () => {
-    try {
-      if (isRegistering) {
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert('Registration successful!');
-      } else {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert('Login successful!');
-      }
-    } catch (error) {
-      alert(error.message);
+    // Mock authentication
+    if (email && password) {
+      alert(isRegistering ? 'Registration successful!' : 'Login successful!');
+    } else {
+      alert('Please enter email and password.');
     }
   };
 
